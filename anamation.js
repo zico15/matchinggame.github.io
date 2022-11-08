@@ -44,6 +44,9 @@ function pulseCard(card){
 
 let timeCounter = document.getElementById('time');
 
+/*
+const clock = setInterval(function () { console.log("Hello"); clearInterval(a) }, 1000);
+*/
 function myTimer() {
 	if (!game.is_run)
 		return;
@@ -53,13 +56,23 @@ function myTimer() {
 		game.seconds = 59;
 	}
 	else
-	game.seconds--;
+		game.seconds--;
+	game.time_count += 0.02;
+	if (game.time_count >= game.time_tester && game.count > 1)
+	{
+		game.time_count = 0.0;
+		game.count--;
+		game.stars[game.level] = game.count;
+		document.getElementById(('fa-start_'+game.count)).style.color = "#fff";
+		console.log("count: "+game.count);
+	}
 	setTextTime();
 	if (game.minutes == 0 && game.seconds == 0)
 		gameOver();
 	else
    		setTimeout(myTimer, 1000);
 }
+
 
 function setTextTime(){
 	timeCounter.textContent =  `${game.minutes > 9 ? game.minutes : "0" + game.minutes} : ${game.seconds > 9 ? game.seconds : "0" + game.seconds}`;

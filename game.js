@@ -1,6 +1,9 @@
 
-var game = { minutes: 0, seconds: 0, is_run: true, moves: 0, 
-             level: 0, card_select: null, card_max: 0, matching: 0};
+var game = { minutes: 0, seconds: 0, is_run: true, matching: 0,
+             level: 0, level_max: 0, card_select: null, card_max: 0,
+             scores: null, clock: null, time_tester: 0.0, count: 5,
+             time_count: 0.0, stars: null
+            };
 
 function creatingImageCard(baseCard, fileImage){
     var card = document.createElement("div");
@@ -16,8 +19,8 @@ function creatingImageCard(baseCard, fileImage){
 function creatingCard(board, id, fileImage, size){
     var baseCard = document.createElement("div");
     baseCard.id = id;
-    baseCard.style.width =  size[0] + "px";
-    baseCard.style.height = size[1] + "px";
+    baseCard.style.width = "calc("+size[0]+"%)";
+    baseCard.style.height = "calc("+size[1]+"%)";;
     baseCard.className = "baseCard";
     creatingImageCard(baseCard, fileImage);
     board.appendChild(baseCard, fileImage);
@@ -37,7 +40,7 @@ function creatingBoard(level, board){
         if (j >= level.img.length)
             j = 0;
     }
-    var size = [540 / level.width, 540 / level.height];
+    var size = [100 / level.width, 100 / level.height];
     for (i = 0; i < game.card_max; i++)
     {
         var index = getRandomInt(result.length);        
@@ -47,11 +50,17 @@ function creatingBoard(level, board){
 }
 
 function  initBoard(level){
+    for (let index = 0; index < 5; index++)
+        document.getElementById(('fa-start_'+index)).style = "";
     game.card_select = null;
+    game.count = 5;
+    game.time_count = 0.0;
     game.matching = 0;
+    game.time_tester = parseFloat( `${game.minutes}.${game.seconds}`) / 5.0;
+    console.log("time: "+ game.time_tester);
     document.getElementById("title").textContent = level.title;
     document.getElementById("time").textContent = level.time; 
-    document.getElementById("moves_count").textContent = level.moves;    
+    document.getElementById("scores_count").textContent = 0;    
     game.minutes = level.time.minutes;
     game.seconds = level.time.seconds;
     setTextTime();
@@ -63,18 +72,23 @@ function  initBoard(level){
 initBoard(data[0]);
 
 function start(){
-    document.getElementById("questionPopUp").style.display = "none";
-    document.getElementById("button_start").style.display = "none";
-    document.getElementById("div_level").style.display = "block";
+    game.level_max = data.length;
     game.level = 0;
+    game.is_run = true;
+    game.scores = new Array(game.level_max).fill(0);
+    game.stars = new Array(game.level_max).fill(5);
     refresh();
 }
 function refresh()
-{
+{   
     document.getElementById("questionPopUp").style.display = "none";
+    document.getElementById("msg_won").style.display = "none";
+    document.getElementById("div_game_wow").style.display = "none";    
+    document.getElementById("button_start").style.display = "none";
+    document.getElementById("div_level").style.display = "block";
     if (game.is_run)
     { 
-        initBoard(data[ game.level]);
+        initBoard(data[game.level]);
         game.is_run = false;
         openCardsAll();       
         setTimeout(function(){          
@@ -82,14 +96,34 @@ function refresh()
             setTimeout(function(){        
                 game.is_run = true;
                 myTimer();                
-            }, 2000);
+            }, 100);
         }, 2000);
     }  
 }
 
 function gameOver(){
     document.getElementById("msg_lost").style.display = "block";
-    document.getElementById("questionPopUp").style.display = "block"; 
+    document.getElementById("questionPopUp").style.display = "block";
+}
+
+function gameWon(){
+    var score = 0, media = 0;
+    game.scores.forEach(s => { score += s; });
+    game.stars.forEach(s => { media += s; });
+    media = (media / 2) - 1;
+    if (media < 0 )
+        media = 0;
+    for (let index = 0; index < 5; index++)
+        document.getElementById(('fa-start_won_'+index)).style.color = index <= media  ? "#f5cc27" : "rgb(195 186 186)";
+    console.log("media: " + media);
+    document.getElementById("scores_count_all").textContent = score.toFixed(0); 
+    document.getElementById("div_level").style.display = "none";
+    document.getElementById("button_start").style.display = "none";
+    document.getElementById("msg_lost").style.display = "none";
+    document.getElementById("msg_won").style.display = "block";
+    document.getElementById("div_game_wow").style.display = "block";
+    document.getElementById("questionPopUp").style.display = "block";
+    game.is_run = false;
 }
 
 function nextLevel(){
@@ -109,7 +143,10 @@ document.querySelector(".deck").addEventListener("click", function(event){
 
         if (game.card_select.src == card.src)
         {
-            console.log("ok");
+            //score
+            var score = `${game.minutes}.${game.seconds}`;
+            game.scores[game.level] += parseFloat(score) * (game.level + 1) * 15;
+            document.getElementById("scores_count").textContent = game.scores[game.level].toFixed(0); 
             game.matching += 2;
             pulseCard(game.card_select);
             pulseCard(card);
@@ -121,7 +158,12 @@ document.querySelector(".deck").addEventListener("click", function(event){
         }
         game.card_select = null;
         if (game.card_max == game.matching)
-            document.getElementById("questionPopUp").style.display = "block";
+        {   
+            if (game.level == game.level_max - 1)
+                gameWon();
+            else
+                document.getElementById("questionPopUp").style.display = "block";
+        }
     }
     
 });
