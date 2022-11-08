@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Matching Game</title>
+    <meta name="description" content="">
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <link rel="stylesheet" href="./styles/app.css">
+    <link rel="stylesheet" type="text/css" href="./styles/responsive.css">
+    <script type="text/javascript" src="data.js"></script>
+    <link rel="stylesheet" href="./styles/animate.css">
+<style></style></head>
+<body>
+    <section class="info">       
+        <div class="calc-user">
+            <div class="count-move">
+              <div class="moves"><span>Moves: </span><span id="moves_count" class="count">5</span></div>
+              <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+            </div>
+            <h1 id="title" style="margin: auto;    color: #fff;">Matching Game</h1>
+            <div class="count-time">
+              <div class="time"><i class="page"></i><span>⏱️ Time</span></div>
+              <div class="time-num" style="margin-left: 25px;"><span id="time" class="displayTime">00:00</span></div>
+            </div>
+          </div>
+    </section>
+     
+    <div id="board-view" class="deck"> 
+
+    </div>
+    <div id="questionPopUp" class="modal" style="display: block;">
+        <!-- Modal content -->
+        <div class="modal-content"> 
+          <h3>Matching Game</h3>
+          <h2 id="msg_won" style="color: blue; display: none;">You Won</h2>
+          <h2 id="msg_lost" style="color: crimson; display: none;">You Lost</h2>
+          <div id="div_level" style="display: none;">
+            <button type="button" class="refresh" style="margin-top: 30px; margin-right: 50px;" onclick="refresh()">Restart Game!</button>
+            <button type="button" class="refresh" style="margin-top: 30px;" onclick="nextLevel()">Next Level!</button>
+          </div>
+          <button id="button_start" type="button" class="refresh" style="margin-top: 30px;" onclick="start()">Start Game!</button>
+        </div>
+    </div>
+
+    <button class="refresh" type="button" onclick="refresh()">Refresh</button>
+    <script src="anamation.js"></script> 
+    <script src="game.js"></script> 
+   
+<div id="torrent-scanner-popup" style="display: none;"></div></body></html>

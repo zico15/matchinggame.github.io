@@ -1,0 +1,317 @@
+@font-face {
+    font-family: 'Rockwell'; 
+    src: url('../fonts/Rockwell.ttf') format('woff'); 
+}
+
+body{
+    text-align: center;
+    background-image: url('../img/animated-pattern.gif');
+    background-size: cover;  
+
+    height: 100vh;
+    padding:0;
+    margin:0;
+}
+
+h1 {
+    font-family: 'Rockwell', sans-serif;
+    color: #333333;
+    margin-block-start: 2em;
+    margin-block-end: 0.2em;
+}
+
+.level {
+    font-family: Rockwell-Regular;
+    font-size: 28px;
+    color: #293040;
+    letter-spacing: -1.13px;
+}
+
+.numbers {
+    display: inline-block;
+    font-family: Rockwell-Regular;
+    font-size: 24px;
+    color: #293040;
+    letter-spacing: -0.76px;
+}
+
+.timeNum {
+    display: inline-block;
+    font-family: Rockwell-Regular;
+    font-size: 24px;
+    color: #293040;
+    letter-spacing: -0.76px;
+}
+
+.seconds {
+    display: inline-block;
+    font-family: Rockwell-Regular;
+    font-size: 24px;
+    color: #293040;
+    letter-spacing: -0.76px;
+}
+
+.unit {
+    display: inline-block;
+    font-family: Rockwell-Regular;
+    font-size: 24px;
+    color: #293040;
+    letter-spacing: -0.76px;
+}
+
+.deck {
+   
+    box-shadow: 0px 15px 15px -5px #BFC2CA;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.baseCard {
+    cursor: pointer;
+    width: 25%;
+    height: 25%;
+}
+
+.card {   
+    background: rgb(255, 255, 255);
+    box-shadow: 8px 8px 8px -4px #C8CCD4;
+    border-radius: 6px;
+    width: 86%;
+    height: 86%;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.test {   
+    background: rgb(197, 182, 182);
+    box-shadow: 8px 8px 8px -4px #C8CCD4;
+    border-radius: 6px;
+    width: 86%;
+    height: 86%;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.open { 
+    border-radius: 6px;
+    background-image: linear-gradient(-135deg, #77D037 0%, #429321 100%);
+    box-shadow: 8px 8px 8px -4px rgba(86,196,99,0.50);
+    width: 86%;
+    height: 86%;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.match {
+    border-radius: 6px;
+    background-image: linear-gradient(-136deg, #569CFF 0%, #515DEC 100%);
+    box-shadow: 8px 8px 8px -4px rgba(71,182,239,0.53);
+    width: 86%;
+    height: 86%;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.notMatch {
+    border-radius: 6px;
+    background-image: linear-gradient(-135deg, #FF6674 0%, #E31534 100%);
+    box-shadow: 8px 8px 8px -4px rgba(226,9,35,0.34);
+    width: 86%;
+    height: 86%;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.randomImg {
+    width: 86%;
+    height: 86%;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.cardBack{
+    background-image: linear-gradient(-136deg, #569CFF 0%, #515DEC 100%);
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+.refresh {
+    cursor: pointer;
+    border: 0px;
+    width: 120px;
+    height: 40px;
+    border-radius: 8px;
+    margin-top: 40px;
+    background-image: linear-gradient(-136deg, #569CFF 0%, #515DEC 100%);
+    box-shadow: 8px 8px 8px -4px rgba(71,182,239,0.53);
+    font-family: Rockwell-Regular;
+    font-size: 18px;
+    color: #FFFFFF;
+    line-height: 44px;
+}
+
+.again {
+    cursor: pointer;
+    border: 0px;
+    width: 120px;
+    height: 40px;
+    border-radius: 8px;
+    margin-top: 40px;
+    background-image: linear-gradient(-136deg, #569CFF 0%, #515DEC 100%);
+    box-shadow: 8px 8px 8px -4px rgba(71,182,239,0.53);
+    font-family: Rockwell-Regular;
+    font-size: 18px;
+    color: #FFFFFF;
+    line-height: 44px;
+}
+
+.success {
+    display: none;
+    width:100%;
+    height: 100%;
+    position:fixed;
+    margin: 0 auto;
+    top: 0;
+    background: rgba(41,48,64,0.90);
+}
+
+#congrats{
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+
+#score{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Rockwell-Regular;
+    font-size: 48px;
+    color: #FFFFFF;
+}
+
+#numbers{
+    margin-top: 0px;
+    margin-bottom: 4px;
+    display: inline-block;
+    font-family: Rockwell-Regular;
+    font-size: 28px;
+    color: #FFFFFF;
+}
+
+#timeNum_2 {
+    margin-top: 0px;
+    margin-bottom: 4px;
+    display: inline-block;
+    font-family: Rockwell-Regular;
+    font-size: 28px;
+    color: #FFFFFF;
+}
+
+#unit{
+    margin-top: 0px;
+    margin-bottom: 4px;
+    display: inline-block;
+    font-family: Rockwell-Regular;
+    font-size: 28px;
+    color: #FFFFFF;
+}
+
+.congratsImg {
+    text-align: center;
+    margin-top: 220px;
+    width: 540px;
+}
+
+.modal {
+    height: 100%;
+    
+}
+
+.calc-user {
+    display: flex;
+    width: 520px;
+    background: linear-gradient(160deg, #29e779 0%, #4568dc 100%);
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: #fff;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.rating i {
+    color: #f5cc27;
+}
+
+.page {
+    font-family: "Merriweather", serif;
+}
+
+.fa-stopwatch:before {
+    content: "\f2f2";
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 15px;
+    width: 400px; /* Could be more or less, depending on screen size */
+    max-width: 700px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+
+  .modal-content h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: auto;
+    margin-bottom: 0px;
+}
+
